@@ -1,0 +1,7 @@
+{
+  "name": "todo-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
