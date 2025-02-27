@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Task List
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    @for (task of tasks; track task) {
+      <ion-item [ngClass]="{'comliated': true}">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ task.title }}</ion-card-title>
+            <ion-card-subtitle>
+              {{ task.status | uppercase }}
+            </ion-card-subtitle>
+          </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+          <ion-card-content>
+            <p>{{ task.description || 'No description available' }}</p>
+          </ion-card-content>
+
+          <ion-item>
+            <ion-button fill="clear" color="primary" (click)="viewTask(task.id)">
+              <ion-icon name="eye"></ion-icon> View Details
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="clear" color="danger" (click)="deleteTask(task.id)">
+              <ion-icon name="trash"></ion-icon> Delete
+            </ion-button>
+          </ion-item>
+        </ion-card>
+      </ion-item>
+    }
+  </ion-list>
 </ion-content>
