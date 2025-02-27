@@ -25,4 +25,3 @@ export class TaskService {
     return this.http.delete(this.taskPath, {params:{id}})
   }
 }
-

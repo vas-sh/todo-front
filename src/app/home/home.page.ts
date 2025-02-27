@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/task';
+import { ModalController } from '@ionic/angular';
+import { CreateTaskPage } from '../create-task/create-task.page';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,7 @@ export class HomePage implements OnInit {
   
   constructor(
     private taskService: TaskService,
+    private modalCtrl: ModalController,
   ) {}
 
   ngOnInit(): void {
@@ -35,4 +38,17 @@ export class HomePage implements OnInit {
       }
     })
   } 
+
+  async add() {
+    const modal = await this.modalCtrl.create({
+      component: CreateTaskPage,
+    })
+    modal.onDidDismiss().then((value: any ) => {
+      console.log(value)
+      this.tasks.push(value.data);
+    })
+    await modal.present()
+  }
+
 }
+

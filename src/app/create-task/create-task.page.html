@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>create-task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>
+      Title
+    </ion-label>
+    <ion-input [(ngModel)]="task.title">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Description
+    </ion-label>
+    <ion-input [(ngModel)]="task.description">
+    </ion-input>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons>
+  <ion-button (click)="save()">
+    Save
+  </ion-button>
+  </ion-buttons>
+</ion-footer>
