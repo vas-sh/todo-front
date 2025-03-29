@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input [(ngModel)]="data.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-input [(ngModel)]="data.email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Password</ion-label>
+    <ion-input [(ngModel)]="data.password"></ion-input>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons slot="end">
+    <ion-button (click)="save()">
+      Save
+    </ion-button>
+  </ion-buttons>
+</ion-footer>
