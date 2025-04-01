@@ -6,8 +6,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CreateTaskPageModule } from './create-task/create-task.module';
+import { TokenInterceptor } from './interseptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,12 @@ import { CreateTaskPageModule } from './create-task/create-task.module';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideHttpClient()
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
   ],
 
   bootstrap: [AppComponent],
