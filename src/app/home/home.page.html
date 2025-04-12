@@ -1,44 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Task List
-    </ion-title>
-    <ion-buttons>
-      <ion-button (click)="add()">
-        Add
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+  <div class="menu header-bg">
+    <div class="home">Todo List</div>
+    <div class="account">
+      R
+    </div>
+  </div>  
 </ion-header>
 
+
 <ion-content>
-  <ion-list>
-    @for (task of tasks; track task) {
-      <ion-item [ngClass]="{'comliated': true}">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ task.title }}</ion-card-title>
-            <ion-card-subtitle>
-              {{ task.status | uppercase }}
-            </ion-card-subtitle>
-          </ion-card-header>
+  <div class="container">
+    
+    <div class="tasks header-bg">
+      <div class="tasks-header">
+        <div class="title">
+          Tasks
+        </div>
+        <div class="button" (click)="add()">
+          Add
+        </div>
+      </div>
 
-          <ion-card-content>
-            <p>{{ task.description || 'No description available' }}</p>
-          </ion-card-content>
+      @for (task of tasks; track task) {
+        <div class="task" (click)="editTask(task)">
+          <div class="task-icon" [ngClass]="{'done': task.status == statuses.DONE, 'canceled': task.status == statuses.CANCELED}">
+            <div></div>
+          </div>
+          <div class="task-content">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-desc">{{ task.description }}</div>
+          </div>
+          <img class="delete-btn" 
+               (click)="deleteTask(task.id)" 
+               src="assets/icon/trash.svg"/>
+        </div>
+      }
+    </div>
+  </div>
 
-          <ion-item>
-            <ion-button fill="clear" color="primary" (click)="viewTask(task.id)">
-              <ion-icon name="eye"></ion-icon> View Details
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-button fill="clear" color="danger" (click)="deleteTask(task.id)">
-              <ion-icon name="trash"></ion-icon> Delete
-            </ion-button>
-          </ion-item>
-        </ion-card>
-      </ion-item>
-    }
-  </ion-list>
 </ion-content>

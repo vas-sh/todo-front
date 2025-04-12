@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SignUp } from '../classes/sign-up';
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user';
+import { ToastController } from '@ionic/angular';
+import { NotifyMessageService } from '../services/notify-message.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,12 +16,18 @@ export class SignUpPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private notifyMessageService: NotifyMessageService
   ) { }
 
   ngOnInit() {
   }
 
-  save() {
+  async save() {
+    const err = this.data.validationErrors;
+    if (err) {
+      await this.notifyMessageService.send(err)
+      return 
+    }
     this.userService.signUp(this.data).subscribe((resp: User) => {
       console.log(resp)
     })

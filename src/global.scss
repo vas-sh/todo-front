@@ -35,3 +35,36 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+.header-bg {
+    background: #333f54;;
+}
+
+.button {
+    background: #f8c345;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px #f8c345 solid
+}
+
+:root {
+    --ion-background-color: #222c41;
+}
+
+.button:hover {
+    border: 1px #6a69e0 solid
+}
+
+ion-modal.modal-view::part(content) {
+    border-radius: 20px 
+}
+
+ion-radio {
+    color: white;
+}

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateTask } from '../classes/create-task';
+import { Task } from '../classes/task';
 import { Constants } from '../classes/constants';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class TaskService {
     return this.http.get(this.taskPath)
   }
 
-  create(body: CreateTask): Observable<any> {
+  create(body: Task): Observable<any> {
     return this.http.post(this.taskPath, body.serialize())
   }
 

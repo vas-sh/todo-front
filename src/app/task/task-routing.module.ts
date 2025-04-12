@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateTaskPage } from './create-task.page';
+import { TaskPage } from './task.page';
 
 const routes: Routes = [
   {
     path: 'task',
-    component: CreateTaskPage
+    component: TaskPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CreateTaskPageRoutingModule {}
+export class TaskPageRoutingModule {}

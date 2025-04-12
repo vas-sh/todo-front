@@ -1,0 +1,52 @@
+ion-title {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+
+    .left-side, .right-side {
+        float: left;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.right-side {
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.label {
+    color: white;
+    font-size: 18px;
+    height: 40px;
+    padding-top: 10px;
+}
+
+.greeting {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.button {
+    width: 400px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+ion-input {
+    border-bottom: 1px solid white;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 20px;
+}
