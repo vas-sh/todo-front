@@ -23,6 +23,10 @@ export class TaskService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(this.taskPath, {params:{id}})
+    return this.http.delete(this.taskPath+`/${id}`)
+  }
+
+  update(body: Task): Observable<any> {
+    return this.http.put(this.taskPath+`/${body.id}`, body.serialize())
   }
 }

@@ -24,8 +24,10 @@ export class TaskPage implements OnInit {
   
   save() {
     if (this.task.id) {
-      this.modalCtrl.dismiss()
-      return // TODO: edit
+      this.taskService.update(this.task).subscribe((resp: any) =>{
+        this.modalCtrl.dismiss(this.task)
+      })
+      return
     }
     this.taskService.create(this.task).subscribe((resp: ITask) => {
       this.modalCtrl.dismiss(resp)
