@@ -72,7 +72,12 @@ export class HomePage implements OnInit {
       if (!value.data) {
         return;
       }
-      this.tasks.push(value.data);
+      if (this.tasks.length) {
+        this.tasks.push(this.tasks[0]);
+        this.tasks[0] = value.data;  
+      } else {
+        this.tasks.push(value.data)
+      }
     })
     await modal.present()
   }
