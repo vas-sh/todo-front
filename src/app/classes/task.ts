@@ -7,6 +7,7 @@ export class Task {
         public title: string, 
         public status: Status,
         public description?: string,
+        public estimateTime?: string,
     ){}
 
     public serialize(): ITask {
@@ -14,7 +15,8 @@ export class Task {
             id: this.id,
             status: this.status,
             title: this.title,
-            description: this.description
+            description: this.description,
+            estimateTime: this.estimateTime 
         }
     }
 
@@ -24,6 +26,7 @@ export class Task {
             data.title,
             data.status,
             data.description,
+            data.estimateTime,      
         )
     }
 }

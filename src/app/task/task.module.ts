@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { TaskPageRoutingModule } from './task-routing.module';
 
 import { TaskPage } from './task.page';
+import { DatetimePageModule } from '../components/datetime/datetime.module';
+import { DatefmtPipe } from '../pipes/datefmt.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TaskPageRoutingModule
+    TaskPageRoutingModule,
+    DatetimePageModule,
+    DatefmtPipe
   ],
   declarations: [TaskPage],
   exports: [TaskPage],

@@ -63,3 +63,14 @@ ion-select {
 ion-select-option {
   color: white;
 }
+
+ion-datetime {
+  float: left
+}
+
+.date {
+  float: right;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}

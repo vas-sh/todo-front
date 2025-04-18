@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TaskPageModule } from './task/task.module';
 import { TokenInterceptor } from './interseptors/token.interceptor';
+import { DatetimePageModule } from './components/datetime/datetime.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +17,8 @@ import { TokenInterceptor } from './interseptors/token.interceptor';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    TaskPageModule
+    TaskPageModule,
+    DatetimePageModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -68,3 +68,11 @@ ion-modal.modal-view::part(content) {
 ion-radio {
     color: white;
 }
+
+ion-datetime {
+    --background:  #333f54;
+    --title-color: white;
+    color: white;
+    --wheel-fade-background-rgb: #333f54;
+    --wheel-highlight-background: #333f54;
+}

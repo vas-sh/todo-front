@@ -31,6 +31,12 @@
         <ion-input [(ngModel)]="task.description">
         </ion-input>
       </div>
+      <div class="field" (click)="openDateTime($event)">
+        <div class="label">Estimate time</div>
+       <div class="date">
+        {{ task.estimateTime | datefmt }}
+       </div>
+      </div>
     </div>
   </div>
 </ion-content>
