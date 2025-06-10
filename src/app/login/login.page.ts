@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../classes/login';
 import { UserService } from '../services/user.service';
-import { JwtToken } from '../interfaces/jwt-token';
+import { LoginResp } from '../interfaces/login-resp';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { NotifyMessageService } from '../services/notify-message.service';
 
 @Component({
@@ -31,8 +30,10 @@ export class LoginPage implements OnInit {
       return 
     }
     this.userService.login(this.data).subscribe({
-      next: (resp: JwtToken) => {
+      next: (resp: LoginResp) => {
         this.userService.storeJwtToken(resp);
+        this.userService.storeUser(resp);
+        this.data = new Login("", "");
         this.router.navigate(['/home'])
       },
       error: async (error: any) => {

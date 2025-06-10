@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { ITask } from '../interfaces/task';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { TaskPage } from '../task/task.page';
 import { Status } from '../enums/status';
 import { Task } from '../classes/task';
+import { UserService } from '../services/user.service';
+import { User } from '../interfaces/user';
+import { AccountPage } from '../account/account.page';
 
 @Component({
   selector: 'app-home',
@@ -15,19 +18,20 @@ import { Task } from '../classes/task';
 export class HomePage implements OnInit {
   statuses = Status;
   tasks: ITask[] = [];
-  
+  user?: User;
+
   constructor(
     private taskService: TaskService,
     private modalCtrl: ModalController,
+    private popoverCtrl: PopoverController,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
     this.taskService.list().subscribe((resp: ITask[]) => {
       this.tasks = resp;
-      for (let i = 0; i < this.tasks.length; i++) {
-        console.log(this.tasks[i].status == Status.DONE)
-      }
     })
+    this.user = this.userService.currentUser();
   }
 
   async editTask(task: ITask) {
@@ -78,6 +82,14 @@ export class HomePage implements OnInit {
       } else {
         this.tasks.push(value.data)
       }
+    })
+    await modal.present()
+  }
+
+  async openAccount(ev: any) {
+    const modal = await this.popoverCtrl.create({
+      component: AccountPage,
+      event: ev,
     })
     await modal.present()
   }

@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'confirm/:id',
     loadChildren: () => import('./confirm/confirm.module').then( m => m.ConfirmPageModule)
   },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
 ];
 
 @NgModule({

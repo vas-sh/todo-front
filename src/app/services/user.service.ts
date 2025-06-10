@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Login } from '../classes/login';
 import { Observable } from 'rxjs';
 import { SignUp } from '../classes/sign-up';
-import { JwtToken } from '../interfaces/jwt-token';
+import { LoginResp } from '../interfaces/login-resp';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { JwtToken } from '../interfaces/jwt-token';
 export class UserService {
   private userPath: string = Constants.rootURL + "users";
   private tokenKey: string = "token";
+  private userKey: string = "user";
 
   constructor(
     private http: HttpClient
@@ -29,7 +31,7 @@ export class UserService {
     return this.http.get(this.userPath + "/confirm/" + id)
   }
 
-  storeJwtToken(body: JwtToken) {
+  storeJwtToken(body: LoginResp) {
     sessionStorage.setItem(this.tokenKey, body.type + " " + body.token)
   }
 
@@ -39,5 +41,17 @@ export class UserService {
   
   cleanJwtToken() {
     sessionStorage.removeItem(this.tokenKey)
+  }
+
+  storeUser(body: LoginResp) {
+    sessionStorage.setItem(this.userKey, JSON.stringify(body.user))
+  }
+
+  currentUser(): User | undefined {
+    const user = sessionStorage.getItem(this.userKey);
+    if (user) {
+      return JSON.parse(user)
+    }
+    return undefined
   }
 }
