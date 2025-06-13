@@ -29,4 +29,8 @@ export class TaskService {
   update(body: Task): Observable<any> {
     return this.http.put(this.taskPath+`/${body.id}`, body.serialize())
   }
+
+  reportStatuses(): Observable<any> {
+    return this.http.get(this.taskPath + "/report-statuses")
+  }
 }

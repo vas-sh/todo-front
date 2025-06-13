@@ -13,8 +13,13 @@
           Password
         </div>
         <ion-input type="password" [(ngModel)]="data.password"></ion-input>
-        <div class="button" (click)="login()">
-          Login
+        <div class="buttons">
+          <div class="button" (click)="login()">
+            Login
+          </div>
+          <div class="button sign-up" (click)="signUp()">
+            Sign up
+          </div>
         </div>
       </div>
     </div>

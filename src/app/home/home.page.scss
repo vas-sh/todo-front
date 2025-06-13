@@ -121,3 +121,36 @@
 .task-content:hover {
   border-bottom: 1px #6a69e0 solid;
 }
+
+.status-icons {
+  height: 130px;
+  background: #222c41;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+ 
+  .icon {
+    width: 20%;
+    height: 100px;
+    margin: auto;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .count {
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}

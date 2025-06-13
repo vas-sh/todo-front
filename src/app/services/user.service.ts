@@ -54,4 +54,8 @@ export class UserService {
     }
     return undefined
   }
+
+  remove() {
+    return this.http.delete(this.userPath)
+  }
 }

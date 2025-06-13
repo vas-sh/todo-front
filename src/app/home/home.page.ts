@@ -8,6 +8,7 @@ import { Task } from '../classes/task';
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user';
 import { AccountPage } from '../account/account.page';
+import { ReportStatus } from '../interfaces/report-status';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,37 @@ export class HomePage implements OnInit {
   statuses = Status;
   tasks: ITask[] = [];
   user?: User;
+  reportStatuses: { 
+    status: Status;
+    count: number;
+    color: string;
+    title: string;
+    }[] = [
+      {
+        status: Status.NEW, 
+        count: 0,
+        color: " #f8c345",
+        title: "New"
+      },
+      {
+        status: Status.IN_PROGRESS, 
+        count: 0,
+        color: " #f8c345",
+        title: "In Progress"
+      },
+      {
+        status: Status.DONE, 
+        count: 0,
+        color: "#3bc0af",
+        title: "Done"
+      },
+      {
+        status: Status.CANCELED, 
+        count: 0,
+        color: " #ad554f",
+        title: "Canceled"
+      },
+    ];
 
   constructor(
     private taskService: TaskService,
@@ -30,6 +62,16 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.taskService.list().subscribe((resp: ITask[]) => {
       this.tasks = resp;
+    })
+    this.taskService.reportStatuses().subscribe((resp: ReportStatus[]) => {
+      for (const item of resp) {
+        for (const status of this.reportStatuses) {
+          if (item.status == status.status) {
+            status.count = item.count;
+            break;
+          }
+        }
+      }
     })
     this.user = this.userService.currentUser();
   }

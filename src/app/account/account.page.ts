@@ -25,4 +25,13 @@ export class AccountPage implements OnInit {
     this.router.navigate(['login']);
     this.popoverCtrl.dismiss()
   } 
+
+  remove() {
+    this.userService.remove().subscribe({
+      next: () => {
+        this.userService.cleanJwtToken();
+        this.router.navigate(['login']);
+        this.popoverCtrl.dismiss();
+    }})
+  }
 }

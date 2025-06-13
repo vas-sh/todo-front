@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SignUp } from '../classes/sign-up';
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user';
-import { ToastController } from '@ionic/angular';
 import { NotifyMessageService } from '../services/notify-message.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +16,8 @@ export class SignUpPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private notifyMessageService: NotifyMessageService
+    private notifyMessageService: NotifyMessageService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -32,5 +33,4 @@ export class SignUpPage implements OnInit {
       console.log(resp)
     })
   }
-
 }

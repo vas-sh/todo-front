@@ -10,6 +10,18 @@
 
 <ion-content>
   <div class="container">
+    <div class="status-icons">
+      @for (status of reportStatuses; track status) {
+        <div class="icon" [style.backgroundColor]="status.color">
+          <div class="title">
+            {{ status.title }}
+          </div>
+          <div class="count">
+            {{ status.count }}
+          </div> 
+        </div>
+      }  
+    </div>
     
     <div class="tasks header-bg">
       <div class="tasks-header">
