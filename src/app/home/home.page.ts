@@ -9,6 +9,8 @@ import { UserService } from '../services/user.service';
 import { User } from '../interfaces/user';
 import { AccountPage } from '../account/account.page';
 import { ReportStatus } from '../interfaces/report-status';
+import { Completion } from "../enums/completion";
+import { ReportCompletion } from '../interfaces/report-completion';
 
 @Component({
   selector: 'app-home',
@@ -51,6 +53,37 @@ export class HomePage implements OnInit {
         title: "Canceled"
       },
     ];
+  reportCompletion: { 
+    completion: Completion;
+    count: number;
+    color: string;
+    title: string;
+    }[] = [
+      {
+        completion: Completion.DEADLINE_SOON, 
+        count: 0,
+        color: " #f8c345",
+        title: "Deadline soon"
+      },
+      {
+        completion: Completion.NOT_IN_TIME, 
+        count: 0,
+        color: " #f8c345",
+        title: "Done not on time"
+      },
+      {
+        completion: Completion.IN_TIME, 
+        count: 0,
+        color: " #3bc0af",
+        title: "Done in time"
+      },
+      {
+        completion: Completion.ACTIVE_OVERDUE, 
+        count: 0,
+        color: " #ad554f",
+        title: "Actve overdue"
+      },  
+    ];
 
   constructor(
     private taskService: TaskService,
@@ -63,16 +96,8 @@ export class HomePage implements OnInit {
     this.taskService.list().subscribe((resp: ITask[]) => {
       this.tasks = resp;
     })
-    this.taskService.reportStatuses().subscribe((resp: ReportStatus[]) => {
-      for (const item of resp) {
-        for (const status of this.reportStatuses) {
-          if (item.status == status.status) {
-            status.count = item.count;
-            break;
-          }
-        }
-      }
-    })
+    this.refreshReportStatuses();
+    this.refreshReportCompletion();
     this.user = this.userService.currentUser();
   }
 
@@ -134,6 +159,40 @@ export class HomePage implements OnInit {
       event: ev,
     })
     await modal.present()
+  }
+
+  private refreshReportStatuses() {
+    this.taskService.reportStatuses().subscribe((resp: ReportStatus[]) => {
+      for (const item of resp) {
+        for (const status of this.reportStatuses) {
+          if (item.status == status.status) {
+            status.count = item.count;
+            break;
+          }
+        }
+      }
+    })
+  }
+
+  private refreshReportCompletion() {
+     this.taskService.reportCompletion().subscribe((resp: ReportCompletion) => {
+      for (const completion of this.reportCompletion) {
+        switch (completion.completion) {
+          case Completion.IN_TIME:
+            completion.count = resp.in_time;
+            break;
+          case Completion.NOT_IN_TIME:
+            completion.count = resp.not_in_time;
+            break;
+          case Completion.ACTIVE_OVERDUE:
+            completion.count = resp.active_overdue;
+            break;
+          case Completion.DEADLINE_SOON:
+            completion.count = resp.dead_line_soon;
+            break;
+        }
+      }
+    });
   }
 }
 

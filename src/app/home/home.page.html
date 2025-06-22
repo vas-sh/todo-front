@@ -22,6 +22,19 @@
         </div>
       }  
     </div>
+
+    <div class="status-icons">
+      @for (completion of reportCompletion; track completion) {
+        <div class="icon" [style.backgroundColor]="completion.color">
+          <div class="title">
+            {{ completion.title }}
+          </div>
+          <div class="count">
+            {{ completion.count }}
+          </div> 
+        </div>
+      }  
+    </div>
     
     <div class="tasks header-bg">
       <div class="tasks-header">

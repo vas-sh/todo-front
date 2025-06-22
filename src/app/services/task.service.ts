@@ -33,4 +33,8 @@ export class TaskService {
   reportStatuses(): Observable<any> {
     return this.http.get(this.taskPath + "/report-statuses")
   }
+
+  reportCompletion(): Observable<any> {
+    return this.http.get(this.taskPath + "/report-completions")
+  }
 }
