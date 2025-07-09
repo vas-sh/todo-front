@@ -29,6 +29,7 @@ export class SignUpPage implements OnInit {
       await this.notifyMessageService.send(err)
       return 
     }
+    this.router.navigate(['/registration-info'])
     this.userService.signUp(this.data).subscribe((resp: User) => {
       console.log(resp)
     })

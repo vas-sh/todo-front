@@ -1,0 +1,37 @@
+.info {
+    margin: 0 auto;
+    width: 800px;
+    height: 150px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #f8c345;
+    border-left: 2px solid #f8c345;
+    margin-bottom: 40px;
+    color: #f8c345;
+    font-size: 30px;
+    position: absolute;
+    top: 55%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    line-height: 1.8;
+}
+
+.line {
+    position: fixed;   
+    top: 15%;
+    left: 5%;
+    width: 8px;
+    height: 65%;
+    background-color: #f8c345;
+    border-radius: 5px;
+}
+
+.title {
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 60px;
+    border: 0;
+    top: 35%;
+}
