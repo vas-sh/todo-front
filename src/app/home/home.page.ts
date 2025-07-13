@@ -11,6 +11,8 @@ import { AccountPage } from '../account/account.page';
 import { ReportStatus } from '../interfaces/report-status';
 import { Completion } from "../enums/completion";
 import { ReportCompletion } from '../interfaces/report-completion';
+import { WebsocketService } from '../services/websocket.service';
+import { Events } from '../enums/events';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +24,7 @@ export class HomePage implements OnInit {
   statuses = Status;
   tasks: ITask[] = [];
   user?: User;
+  event = Events;
   reportStatuses: { 
     status: Status;
     count: number;
@@ -90,15 +93,15 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController,
     private popoverCtrl: PopoverController,
     private userService: UserService,
+    private wsService: WebsocketService,
   ) {}
 
   ngOnInit(): void {
-    this.taskService.list().subscribe((resp: ITask[]) => {
-      this.tasks = resp;
-    })
+    this.refreshTasks();
     this.refreshReportStatuses();
     this.refreshReportCompletion();
     this.user = this.userService.currentUser();
+    this.createConn();
   }
 
   async editTask(task: ITask) {
@@ -143,12 +146,7 @@ export class HomePage implements OnInit {
       if (!value.data) {
         return;
       }
-      if (this.tasks.length) {
-        this.tasks.push(this.tasks[0]);
-        this.tasks[0] = value.data;  
-      } else {
-        this.tasks.push(value.data)
-      }
+      this.refreshTasks();
     })
     await modal.present()
   }
@@ -161,14 +159,34 @@ export class HomePage implements OnInit {
     await modal.present()
   }
 
+  createConn() {
+    const token = this.userService.getJwtToken()
+    this.wsService.connect(token!);
+    this.wsService.messages.subscribe((msg) => {
+      if (msg === this.event.UPDATED_TASK || msg === this.event.DELETED_TASK || msg === this.event.CREATED_TASK) {
+        this.refreshReportCompletion();
+        this.refreshReportStatuses();
+        this.refreshTasks();
+      }
+    });
+  }
+
   private refreshReportStatuses() {
-    this.taskService.reportStatuses().subscribe((resp: ReportStatus[]) => {
-      for (const item of resp) {
-        for (const status of this.reportStatuses) {
-          if (item.status == status.status) {
-            status.count = item.count;
+    this.taskService.reportStatuses().subscribe((resp: ReportStatus) => {
+      for (const status of this.reportStatuses) {
+        switch (status.status) {
+          case Status.NEW:
+            status.count = resp.new_status;
             break;
-          }
+          case Status.IN_PROGRESS:
+            status.count = resp.in_progress;
+            break;
+          case Status.DONE:
+            status.count = resp.done;
+            break;
+          case Status.CANCELED:
+            status.count = resp.canceled;
+            break;
         }
       }
     })
@@ -193,6 +211,12 @@ export class HomePage implements OnInit {
         }
       }
     });
+  }
+
+  public refreshTasks() {
+    this.taskService.list().subscribe((resp: ITask[]) => {
+      this.tasks = resp;
+    })
   }
 }
 

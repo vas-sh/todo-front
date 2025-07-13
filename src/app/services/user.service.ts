@@ -32,23 +32,23 @@ export class UserService {
   }
 
   storeJwtToken(body: LoginResp) {
-    sessionStorage.setItem(this.tokenKey, body.type + " " + body.token)
+    localStorage.setItem(this.tokenKey, body.type + " " + body.token)
   }
 
   getJwtToken(): string | null {
-    return sessionStorage.getItem(this.tokenKey);
+    return localStorage.getItem(this.tokenKey);
   }
   
   cleanJwtToken() {
-    sessionStorage.removeItem(this.tokenKey)
+    localStorage.removeItem(this.tokenKey)
   }
 
   storeUser(body: LoginResp) {
-    sessionStorage.setItem(this.userKey, JSON.stringify(body.user))
+    localStorage.setItem(this.userKey, JSON.stringify(body.user))
   }
 
   currentUser(): User | undefined {
-    const user = sessionStorage.getItem(this.userKey);
+    const user = localStorage.getItem(this.userKey);
     if (user) {
       return JSON.parse(user)
     }
