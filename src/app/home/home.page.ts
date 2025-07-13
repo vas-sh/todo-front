@@ -161,7 +161,7 @@ export class HomePage implements OnInit {
 
   createConn() {
     const token = this.userService.getJwtToken()
-    this.wsService.connect(token!);
+    this.wsService.connect(token);
     this.wsService.messages.subscribe((msg) => {
       if (msg === this.event.UPDATED_TASK || msg === this.event.DELETED_TASK || msg === this.event.CREATED_TASK) {
         this.refreshReportCompletion();
