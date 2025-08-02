@@ -58,4 +58,8 @@ export class UserService {
   remove() {
     return this.http.delete(this.userPath)
   }
+
+  createTgBotToken(): Observable<any> {
+    return this.http.post(this.userPath + "/bot-token", null)
+  }
 }

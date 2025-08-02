@@ -6,7 +6,7 @@
 
 .account {
     width: 100%;
-    height: 120px;
+    height: 180px;
     background:  #222c41;
     display: flex;
     flex-direction: column;
@@ -18,5 +18,13 @@
 }
 
 .remove:hover {
+    border: 1px #6a69e0 solid
+}
+
+.telegram-bot {
+    background-color: #f8c345;
+}
+
+.telegram-bot:hover {
     border: 1px #6a69e0 solid
 }
